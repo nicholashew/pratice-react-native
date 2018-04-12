@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { Button, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
+import HeaderTitle from './headerTitle';
+
 class Home extends Component {
+  static navigationOptions = {
+    headerTitle: <HeaderTitle />
+  };
+  
   render() {
     return (
       <View>

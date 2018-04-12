@@ -3,6 +3,19 @@ import { Button, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 class Enquiry extends Component {
+  static navigationOptions = ({ navigation, navigationOptions }) => {
+    const { params } = navigation.state;
+
+    return {
+      title: params ? `Enquiry (${params.enquiryType})` : 'Enquiry',
+      /* These values are used instead of the shared configuration! */
+      headerStyle: {
+        backgroundColor: navigationOptions.headerTintColor,
+      },
+      headerTintColor: navigationOptions.headerStyle.backgroundColor,
+    };
+  };
+
   render() {
     const { params } = this.props.navigation.state;
     const enquiryType = params ? params.enquiryType : null;
