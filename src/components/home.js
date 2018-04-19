@@ -9,6 +9,7 @@ class Home extends Component {
     const params = navigation.state.params || {};
 
     return {
+      drawerLabel: 'Home',
       headerTitle: <HeaderTitle />,
       headerLeft: (
         <Button
@@ -26,6 +27,10 @@ class Home extends Component {
         <Text>Open up App.js to start working on your app!!!</Text>
         <Text>Changes you make will automatically reload.</Text>
         <Text>Shake your phone to open the developer menu.</Text>
+        <Button 
+          title="Toggle Drawer Menu"
+          onPress={() => this.props.navigation.navigate('DrawerToggle')}
+        />
         <Button 
           title="Go to About"
           onPress={() => this.props.navigation.navigate('About')}

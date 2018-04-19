@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
+import { DrawerNavigator, StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Home from './src/components/home';
@@ -53,6 +53,9 @@ const TabNav = TabNavigator(
     },
     About: {
       screen: About
+    },
+    Enquiry: {
+      screen: Enquiry
     }
   },
   {
@@ -82,9 +85,21 @@ const TabNav = TabNavigator(
   }
 );
 
+const DrawerNav = DrawerNavigator({
+  Home: {
+    screen: TabNav    
+  },
+  About: {
+    screen: About
+  },
+  Enquiry: {
+    screen: Enquiry
+  }
+});
+
 export default class App extends React.Component {
   render() {
-    return <TabNav />
+    return <DrawerNav />
   }
 }
 
