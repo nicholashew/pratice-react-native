@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 
 import Home from './src/components/home';
 import About from './src/components/about';
@@ -33,6 +33,7 @@ const MainStack = StackNavigator(
   }
 );
 
+/*
 const RootStack = StackNavigator(
   {
     Main: {
@@ -47,10 +48,35 @@ const RootStack = StackNavigator(
     headerMode: 'none'
   }  
 );
+*/
+
+const TabNav = TabNavigator(
+  {
+    Home: {
+      screen: MainStack
+    },
+    About: {
+      screen: About
+    },
+    Modal: {
+      screen: ModalScreen
+    },
+  },
+  {
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
+    },
+    animationEnabled: false,
+    swipeEnabled: false,
+  }
+);
 
 export default class App extends React.Component {
   render() {
-    return <RootStack />
+    return <TabNav />
   }
 }
 
