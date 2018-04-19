@@ -5,14 +5,27 @@ import { StackNavigator } from 'react-navigation';
 import HeaderTitle from './headerTitle';
 
 class Home extends Component {
-  static navigationOptions = {
-    headerTitle: <HeaderTitle />
+  static navigationOptions = ({navigation}) => {
+    const params = navigation.state.params || {};
+
+    return {
+      headerTitle: <HeaderTitle />,
+      headerLeft: (
+        <Button
+          onPress={() => navigation.navigate('Modal')}
+          title="Modal"
+        />
+      )
+    };
   };
   
   render() {
     return (
-      <View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>This is Home</Text>
+        <Text>Open up App.js to start working on your app!!!</Text>
+        <Text>Changes you make will automatically reload.</Text>
+        <Text>Shake your phone to open the developer menu.</Text>
         <Button 
           title="Go to About"
           onPress={() => this.props.navigation.navigate('About')}

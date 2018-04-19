@@ -5,8 +5,9 @@ import { StackNavigator } from 'react-navigation';
 import Home from './src/components/home';
 import About from './src/components/about';
 import Enquiry from './src/components/enquiry';
+import ModalScreen from './src/components/modalScreen';
 
-const RootStack = StackNavigator(
+const MainStack = StackNavigator(
   {
     Home: {
       screen: Home,
@@ -32,15 +33,24 @@ const RootStack = StackNavigator(
   }
 );
 
+const RootStack = StackNavigator(
+  {
+    Main: {
+      screen: MainStack,
+    },
+    Modal: {
+      screen: ModalScreen
+    }
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none'
+  }  
+);
+
 export default class App extends React.Component {
   render() {
-    return <RootStack /> /*(
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!!!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>                
-      </View>
-    );*/
+    return <RootStack />
   }
 }
 
