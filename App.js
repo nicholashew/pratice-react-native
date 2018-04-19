@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Home from './src/components/home';
 import About from './src/components/about';
@@ -11,9 +12,6 @@ const MainStack = StackNavigator(
   {
     Home: {
       screen: Home,
-    },
-    About: {
-      screen: About,
     },
     Enquiry: {
       screen: Enquiry,
@@ -33,7 +31,6 @@ const MainStack = StackNavigator(
   }
 );
 
-/*
 const RootStack = StackNavigator(
   {
     Main: {
@@ -48,21 +45,32 @@ const RootStack = StackNavigator(
     headerMode: 'none'
   }  
 );
-*/
 
 const TabNav = TabNavigator(
   {
     Home: {
-      screen: MainStack
+      screen: RootStack
     },
     About: {
       screen: About
-    },
-    Modal: {
-      screen: ModalScreen
-    },
+    }
   },
   {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = `ios-home${focused ? '' : '-outline'}`;
+        } else if (routeName === 'About') {
+          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+        }
+
+        // You can return any component that you like here! We usually use an
+        // icon component from react-native-vector-icons
+        return <Ionicons name={iconName} size={25} color={tintColor} />;
+      },
+    }),
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     tabBarOptions: {
