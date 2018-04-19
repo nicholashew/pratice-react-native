@@ -6,13 +6,14 @@ class Enquiry extends Component {
   static navigationOptions = ({ navigation, navigationOptions }) => {
     const { params } = navigation.state;
     return {
-      drawerLabel: 'Enquiry',
       title: params ? `Enquiry (${params.enquiryType})` : 'Enquiry',
       /* These values are used instead of the shared configuration! */
+      /*
       headerStyle: {
         backgroundColor: navigationOptions.headerTintColor,
       },
       headerTintColor: navigationOptions.headerStyle ? navigationOptions.headerStyle.backgroundColor : '#eee',      
+      */
     };
   };
 

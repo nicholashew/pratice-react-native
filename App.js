@@ -1,20 +1,40 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { DrawerNavigator, StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import Home from './src/components/home';
 import About from './src/components/about';
 import Enquiry from './src/components/enquiry';
+import HeaderTitle from './src/components/headerTitle';
+import Home from './src/components/home';
+import HomeDetails from './src/components/homeDetails';
 import ModalScreen from './src/components/modalScreen';
 
 const MainStack = StackNavigator(
   {
     Home: {
-      screen: Home,
+      screen: Home, 
+      navigationOptions: ({navigation}) => ({
+        title: 'Home',
+        headerTitle: <HeaderTitle />,
+        headerLeft:(
+          <TouchableOpacity onPress={() => navigation.navigate("DrawerOpen")}>
+            <Ionicons name="ios-menu" size={30} color="#fff" />
+          </TouchableOpacity>
+        ),
+        headerRight: (
+          <Button
+            onPress={() => navigation.navigate('Modal')}
+            title="Login"
+          />
+        )       
+      })
     },
-    Enquiry: {
-      screen: Enquiry,
+    HomeDetails: {
+      screen: HomeDetails,
+      navigationOptions: (props) => ({
+        title: "Detail",
+      })
     },
   },
   {
@@ -22,11 +42,13 @@ const MainStack = StackNavigator(
     navigationOptions: {      
       headerStyle: {
         backgroundColor: 'rgb(34, 34, 34)',
+        paddingRight: 10, 
+        paddingLeft: 10
       },
       headerTintColor: '#fff',      
       headerTitleStyle: {
         fontWeight: 'bold',
-      },
+      }            
     },
   }
 );
@@ -67,6 +89,8 @@ const TabNav = TabNavigator(
           iconName = `ios-home${focused ? '' : '-outline'}`;
         } else if (routeName === 'About') {
           iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Enquiry') {
+          iconName = `ios-help-circle${focused ? '' : '-outline'}`;
         }
 
         // You can return any component that you like here! We usually use an
@@ -86,14 +110,26 @@ const TabNav = TabNavigator(
 );
 
 const DrawerNav = DrawerNavigator({
-  Home: {
-    screen: TabNav    
+  HomeDrawer: {
+    screen: TabNav,
+    navigationOptions: {
+      drawerLabel: "Home",
+      drawerIcon: ({ tintColor }) => <Ionicons name="ios-home-outline" size={25} />
+    },
   },
-  About: {
-    screen: About
+  AboutDrawer: {
+    screen: About,
+    navigationOptions: {
+      drawerLabel: "About",
+      drawerIcon: ({ tintColor }) => <Ionicons name="ios-information-circle-outline" size={25} />
+    },
   },
-  Enquiry: {
-    screen: Enquiry
+  EnquiryDrawer: {
+    screen: Enquiry,
+    navigationOptions: {
+      drawerLabel: "Enquiry",
+      drawerIcon: ({ tintColor }) => <Ionicons name="ios-help-circle-outline" size={25} />
+    },
   }
 });
 
